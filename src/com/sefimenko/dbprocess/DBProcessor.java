@@ -16,41 +16,45 @@ import java.util.stream.Collectors;
 public class DBProcessor {
 	static String filename = "resources/names.txt";
 
-	
 	static final String url = "jdbc:postgresql://localhost:5433/resume?user=postgres&password=123";
 	Properties props = new Properties();
 	static final String user = "postgres";
 	static final String password = "123";
-	
 
 	public static void main(String[] args) {
 
-		List<String[]> names = new ArrayList<>();
-		
-		
-		
+	}
+
+	// sets up a connection with specified URL
+	public Connection connect() {
 		
 		try {
 			Connection conn = DriverManager.getConnection(url);
+			return conn;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("Connection failed");
-				return;
+				return null;
 			}
 		System.out.println("Connection successful");
-
-		try (BufferedReader br = Files.newBufferedReader(Paths.get(filename))) {
-
-			List<String> fullNames = br.lines().collect(Collectors.toList());
-			System.out.println("Reading successful");
-
-			for (int i = 0; i < fullNames.size(); i++) {
-				names.add(fullNames.get(i).split(" "));
-			}	
-
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
+	try(
+
+	BufferedReader br = Files.newBufferedReader(Paths.get(filename)))
+	{
+
+		List<String> fullNames = br.lines().collect(Collectors.toList());
+		System.out.println("Reading successful");
+
+		for (int i = 0; i < fullNames.size(); i++) {
+			names.add(fullNames.get(i).split(" "));
+		}
+
+	}catch(
+	IOException e)
+	{
+		e.printStackTrace();
 	}
-}
+
+}}
