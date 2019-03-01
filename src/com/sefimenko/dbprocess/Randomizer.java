@@ -13,6 +13,13 @@ public class Randomizer {
 		return result;
 	}
 	
+public int getRandomNumber(int range) {
+		
+		int result = 0 + (int)(Math.random()*range);
+		return result;
+	}
+	
+	
 	
 	// generates array of random digits based on the range provided
 	public int[] getRandomNumber(int count, int[] range) {
