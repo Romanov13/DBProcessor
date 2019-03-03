@@ -34,9 +34,72 @@ public class DBProcessor {
 	static Randomizer r = new Randomizer();
 
 	public static void main(String[] args) {
-
+		
+		readNames();
+		readSentences();
+		DBProcessor dbp = new DBProcessor();
+		dbp.populateUser(fullNames.get(11).split("\\s+"));
+		System.out.println(fullNames.get(0).split("\\s+")[0]);
 	
 	}
+	
+	public void populateUser(String[] fullName) {
+	
+	User user = new User();
+	String bdate = r.getRandomDateOfBirth();
+	String username = generateUsername(fullName);
+	user.setBirthday(bdate);
+	user.setCertName(getRandomSentence());
+	user.setCity(getRandomSentence());
+	user.setContactFacebook("https://www.facebook.com/" + username);
+	user.setContactGithub("https://www.github.com/" + username);
+	user.setContactLinkedin("https://www.linkedin.com/" + username);
+	user.setContactSkype(username);
+	user.setContactStack(username);
+	user.setContactVK(username);
+	user.setCountry(getRandomSentence());
+	user.setCourseEndDate(r.getRandomDate(bdate));
+	user.setCourseName(getRandomSentence());
+	user.setCourseSchoolName(getRandomSentence());
+	user.setEduDescription(getRandomSentence(3));
+	user.setEduStartdate(r.getRandomDate(bdate));
+	user.setEduEndDate(r.getRandomDate(user.getEduStartdate()));
+	user.setEduFaculty(getRandomSentence());
+	user.setEduUniversity(getRandomSentence());
+	user.setEmail(username + "@mail.com");
+	user.setFirstName(fullName[0]);
+	user.setHobbyName(getRandomSentence());
+	user.setInfo(getRandomSentence(5));
+	user.setLangLevel(getRandomSentence());
+	user.setLangName(getRandomSentence());
+	user.setLangType(getRandomSentence());
+	user.setLastName(fullName[1]);
+	user.setPassword("1234");
+	user.setPhone("+" + r.getRandomNumber(9999999));
+	user.setPracticeCompany(getRandomSentence());
+	user.setPracticeDemoURL(getRandomSentence());
+	user.setPracticeDescription(getRandomSentence(5));
+	user.setPracticeStartDate(r.getRandomDate(bdate));
+	user.setPracticeEndDate(r.getRandomDate(user.getPracticeStartDate()));
+	user.setPracticeName(getRandomSentence());
+	user.setPracticeSourceCode(getRandomSentence());
+	user.setQualification(getRandomSentence());
+	user.setSkillCategory(getRandomSentence());
+	user.setSkillDescription(getRandomSentence());
+	user.setWantJob(getRandomSentence());
+	
+	
+	
+	
+	if(user.isCompleted()) {
+		
+	user.setCompleted(true);
+	}
+	
+	System.out.println(user.toString());
+	
+	}
+
 
 	// sets up a connection with a specified URL
 	public void connect() {
@@ -107,5 +170,16 @@ public class DBProcessor {
 			System.out.println("Cannot read sentences");
 		}
 
+	}
+	
+public String generateUsername(String[] fullName) {
+		
+//		String initial = fullName[0].split(".")[0];
+		StringBuffer username = new StringBuffer();
+		username.append(fullName[0].toCharArray()[0]);
+		System.out.println(fullName[0].toCharArray()[0]);
+		username.append(fullName[1]);
+		username.append(r.getRandomNumber(9999));
+		return username.toString();
 	}
 }

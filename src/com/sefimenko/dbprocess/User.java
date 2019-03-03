@@ -294,7 +294,8 @@ public class User {
 		this.info = info;
 	}
 	public boolean isCompleted() {
-		return completed;
+		// need to set up checks for notnull fields
+		return true;
 	}
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
@@ -312,5 +313,15 @@ public class User {
 		this.skillDescription = skillDescription;
 	}
 	
+	public String toString() {
+		StringBuffer bf = new StringBuffer("User: ");
+		bf.append(this.getFirstName() + " " + this.getLastName() +"\n");
+		bf.append("Date of birth: " + this.getBirthday() +"\n");
+		bf.append("Info: " + this.getInfo() +"\n");
+		bf.append("Desired job: " + this.getWantJob() +"\n");	
+		bf.append("Facebook link: " + this.getContactFacebook() + "\n");
+		return bf.toString();
+		
+	}
 
 }
